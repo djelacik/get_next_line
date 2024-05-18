@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:49:54 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/18 14:02:01 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/18 20:03:13 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 32
@@ -31,6 +30,8 @@ typedef struct	s_gnl
 **Function prototypes
 */
 char	*get_next_line(int fd);
-char	*ft_strjoin(char const *s1, char const *s2);
+
+size_t	ft_strlen(const char *s);
+char	*ft_strjoin_free(char *s1, char const *s2, unsigned long max_size);
 
 #endif
