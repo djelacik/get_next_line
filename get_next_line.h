@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:49:54 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/18 11:57:16 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/18 14:02:01 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define GET_NEXT_LINE_H
 
 # include <unistd.h>
+# include <stdlib.h>
+
 
 #ifndef BUFFER_SIZE
 #define BUFFER_SIZE 32
