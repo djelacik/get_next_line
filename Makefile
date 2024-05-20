@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
 
 SOURCES = get_next_line.c get_next_line_utils.c
-BONUS_SOURCES = get_next_line_bonus.c get_next_line_utils_bonus.c
+#BONUS_SOURCES = get_next_line_bonus.c get_next_line_utils_bonus.c
 
 OBJECTS = $(SOURCES:.c=.o)
 BONUS_OBJECTS = $(BONUS_SOURCES:.c=.o)

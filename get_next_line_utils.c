@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:54:09 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/18 20:12:35 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/20 19:13:36 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,28 +24,42 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin_free(char *s1, char const *s2, unsigned long max_size)
+char	*ft_strchr(const char *s, int c)
 {
-	char				*buffer_p;
-	char				*buffer;
-	char				*temp_p;
-	unsigned long		i;
-	unsigned long		size;
+	while (*s != (char)c)
+		if (!*s++)
+			return (0);
+	return ((char *)s);
+}
+
+char	*ft_strjoin_free(char *buffer, char const *temp_buffer)
+{
+	char		*new_buffer;
+	size_t		size;
+	size_t		i;
+	size_t		j;
 	
-	size = (ft_strlen(s1) + ft_strlen(s2));
-	if (max_size < size)
-		size = max_size;
-	buffer = (char *)malloc(sizeof(char) * (size + 1));
-	if (!buffer)
-		return (NULL);
-	buffer_p = buffer;
 	i = 0;
-	temp_p = s1;
-	while (*s1 && i++ < max_size)
-		*buffer++ = *s1++;
-	while (*s2 && i++ < max_size)
-		*buffer++ = *s2++;
-	*buffer++ = 0;
-	free(temp_p);
-	return (buffer_p);
+	while (temp_buffer[i] && temp_buffer[i] != '\n')
+		i++;
+	size = 0;
+	if (buffer)
+		size = ft_strlen(buffer);
+	new_buffer = malloc(sizeof(char) * (size + i + 1));
+	if (!new_buffer)
+		return (NULL);
+	i = 0;
+	while (buffer[i])
+	{
+		new_buffer[i] = buffer[i];
+		i++;
+	}
+	j = 0;
+	while (temp_buffer[j])
+		new_buffer[i++] = temp_buffer[j++];
+	if (temp_buffer[j] == '\n')
+		new_buffer[i++] = '\n';
+	new_buffer[i] = '\0';
+	free(buffer);
+	return (new_buffer);
 }

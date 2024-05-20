@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:49:54 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/18 20:03:13 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/20 13:51:39 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct	s_gnl
 char	*get_next_line(int fd);
 
 size_t	ft_strlen(const char *s);
-char	*ft_strjoin_free(char *s1, char const *s2, unsigned long max_size);
+char	*ft_strchr(const char *s, int c);
+char	*ft_strjoin_free(char *line, char const *buffer);
 
 #endif
