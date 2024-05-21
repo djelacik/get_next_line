@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:54:09 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/21 14:57:26 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/21 17:43:17 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,28 @@ char	*ft_strchr(const char *s, int c)
 			return (0);
 	return ((char *)s);
 }
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	void	*buffer;
+	size_t	total;
+	size_t	i;
+
+	if (count == 0 || size == 0)
+		return (NULL);
+	total = count * size;
+	buffer = malloc(total);
+	if (!buffer)
+		return (NULL);
+	i = 0;
+	while (i < total)
+	{
+		((unsigned char *)buffer)[i] = 0;
+		i++;
+	}
+	return (buffer);
+}
+
 
 char	*ft_strjoin_free(char *buffer, char const *temp_buffer)
 {
@@ -61,31 +83,32 @@ char	*ft_strjoin_free(char *buffer, char const *temp_buffer)
 	return (new_buffer);
 }
 
-char    *cleanbuf(char *buffer)
+char	*cleanbuf(char *buffer)
 {
-    int        i;
-    int        j;
-    char    *new;
+	int		i;
+	int		j;
+	char	*new;
 
-    i = 0;
-    while (buffer[i] != '\0' && buffer[i] != '\n')
-        i++;
-    if (buffer[i] == '\0')
-    {
-        free(buffer);
-        return (NULL);
-    }
-    new = malloc(ft_strlen(buffer) - i + 1);
-    if (!new)
-    {
-        free(buffer);
-        return (NULL);
-    }
-    i++;
-    j = 0;
-    while (buffer[i] != '\0')
-        new[j++] = buffer[i++];
-	new[j] = '\0';
-    free(buffer);
-    return (new);
+	i = 0;
+	while (buffer[i] != '\0' && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	if (buffer[i] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	new = ft_calloc(ft_strlen(buffer + i) + 1, 1);
+	if (!new)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	j = 0;
+	while (buffer[i] != '\0')
+		new[j++] = buffer[i++];
+	free(buffer);
+	return (new);
 }
+
