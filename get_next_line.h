@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:49:54 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/20 13:51:39 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/21 14:57:32 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*get_next_line(int fd);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
+void	*ft_memcpy(void *dst, const void *src, size_t n, int flag);
 char	*ft_strjoin_free(char *line, char const *buffer);
-
+char	*clean_up(char **buffer);
+char    *cleanbuf(char *buffer);
 #endif
