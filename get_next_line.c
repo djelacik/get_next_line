@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:58:36 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/21 17:45:16 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/21 21:38:32 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ static char	*read_to_buffer(int fd, char *buffer)
 		if (ft_strchr(buffer, '\n'))
 			break ;
 		bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
+        //buffer[bytes_read] = '\0';
 	}
 	free(temp_buffer);
 	if (bytes_read == 0 && buffer && !*buffer)
@@ -58,6 +59,8 @@ static char	*extract_line(char **buffer)
 		line[i] = (*buffer)[i];
 		i++;
 	}
+	if (new_line_flag)
+		line[i] = '\n';
 	return (line);
 }
 
@@ -74,7 +77,7 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	line = extract_line(&buffer);
-	buffer = cleanbuf(buffer);
+	buffer = clean_buffer(buffer);
 	if (!line && !*buffer)
 	{
 		free(line);
@@ -83,24 +86,25 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// #include <fcntl.h>
-// #include <stdio.h>
-// int main(void)
-// {
-//     int fd;
-//     char *line;
+#include <fcntl.h>
+#include <stdio.h>
+int main(void)
+{
+    int fd;
+    char *line;
 
-//     fd = open("test.txt", O_RDONLY);
-//     if (fd == -1)
-//     {
-//         perror("open");
-//         return 1;
-//     }
-//     while ((line = get_next_line(fd)) != NULL)
-//     {
-//         printf("%s\n", line);
-//         free(line);
-//     }
-//     close(fd);
-//     return 0;
-// }
+    fd = open("test2.txt", O_RDONLY);
+	//fd = 0;
+    if (fd == -1)
+    {
+        perror("open");
+        return 1;
+    }
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s\n", line);
+        free(line);
+    }
+    close(fd);
+    return 0;
+}

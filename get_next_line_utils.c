@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:54:09 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/21 17:43:17 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/21 21:33:20 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,19 @@ void	*ft_calloc(size_t count, size_t size)
 	return (buffer);
 }
 
-
 char	*ft_strjoin_free(char *buffer, char const *temp_buffer)
 {
 	char		*new_buffer;
 	size_t		size;
 	size_t		i;
 	size_t		j;
-	
+
 	size = 0;
 	if (buffer)
 		size += ft_strlen(buffer);
 	if (temp_buffer)
 		size += ft_strlen(temp_buffer);
-	new_buffer = malloc(sizeof(char) * (size + 1));
+	new_buffer = ft_calloc(size + 1, 1);
 	if (!new_buffer)
 		return (NULL);
 	i = 0;
@@ -83,7 +82,7 @@ char	*ft_strjoin_free(char *buffer, char const *temp_buffer)
 	return (new_buffer);
 }
 
-char	*cleanbuf(char *buffer)
+char	*clean_buffer(char *buffer)
 {
 	int		i;
 	int		j;
@@ -111,4 +110,3 @@ char	*cleanbuf(char *buffer)
 	free(buffer);
 	return (new);
 }
-

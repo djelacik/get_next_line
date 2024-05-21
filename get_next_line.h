@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:49:54 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/21 17:46:24 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/21 21:32:58 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 char	*get_next_line(int fd);
 
 size_t	ft_strlen(const char *s);
-char	*cleanbuf(char *buffer);
 char	*clean_up(char **buffer);
+char	*clean_buffer(char *buffer);
 char	*ft_strchr(const char *s, int c);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strjoin_free(char *line, char const *buffer);

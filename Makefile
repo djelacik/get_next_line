@@ -1,4 +1,4 @@
-NAME = lib_get_next_line.a
+NAME = libgetnextline.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar rcs
