@@ -1,4 +1,0 @@
-The file is created to test the functionality of the program.
-There has to be a longer line to fill the buffer for sure. Hello world! This is still a part of the same line.
-This is the last line of the file.
-This a test file.

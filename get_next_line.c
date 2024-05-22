@@ -6,11 +6,40 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/18 11:58:36 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/21 21:38:32 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:04:31 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+static char	*clean_buffer(char *buffer)
+{
+	int		i;
+	int		j;
+	char	*new;
+
+	i = 0;
+	while (buffer[i] != '\0' && buffer[i] != '\n')
+		i++;
+	if (buffer[i] == '\n')
+		i++;
+	if (buffer[i] == '\0')
+	{
+		free(buffer);
+		return (NULL);
+	}
+	new = ft_calloc(ft_strlen(buffer + i) + 1, 1);
+	if (!new)
+	{
+		free(buffer);
+		return (NULL);
+	}
+	j = 0;
+	while (buffer[i] != '\0')
+		new[j++] = buffer[i++];
+	free(buffer);
+	return (new);
+}
 
 static char	*read_to_buffer(int fd, char *buffer)
 {
@@ -19,22 +48,23 @@ static char	*read_to_buffer(int fd, char *buffer)
 
 	temp_buffer = ft_calloc(BUFFER_SIZE + 1, 1);
 	if (!temp_buffer)
-		return (NULL);
-	bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
+		return (small_clean(&buffer));
+	bytes_read = 1;
 	while (bytes_read > 0)
 	{
+		bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
+		if (bytes_read < 0)
+			return (small_clean(&buffer));
+		if (bytes_read == 0)
+			break ;
+		temp_buffer[bytes_read] = '\0';
 		buffer = ft_strjoin_free(buffer, temp_buffer);
+		if (!buffer)
+			return (small_clean(&temp_buffer));
 		if (ft_strchr(buffer, '\n'))
 			break ;
-		bytes_read = read(fd, temp_buffer, BUFFER_SIZE);
-        //buffer[bytes_read] = '\0';
 	}
 	free(temp_buffer);
-	if (bytes_read == 0 && buffer && !*buffer)
-	{
-		free(buffer);
-		return (NULL);
-	}
 	return (buffer);
 }
 
@@ -69,42 +99,42 @@ char	*get_next_line(int fd)
 	static char	*buffer;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || 0 > read(fd, 0, 0))
+		return (small_clean(&buffer));
 	buffer = read_to_buffer(fd, buffer);
 	if (!buffer)
-	{
-		return (NULL);
-	}
+		return (small_clean(&buffer));
 	line = extract_line(&buffer);
+	if (!line)
+		return (small_clean(&buffer));
 	buffer = clean_buffer(buffer);
-	if (!line && !*buffer)
-	{
-		free(line);
-		return (NULL);
-	}
 	return (line);
 }
 
-#include <fcntl.h>
-#include <stdio.h>
-int main(void)
-{
-    int fd;
-    char *line;
+// #include <fcntl.h>
+// #include <stdio.h>
+// int main(void)
+// {
+//     int fd;
+//     char *line;
 
-    fd = open("test2.txt", O_RDONLY);
-	//fd = 0;
-    if (fd == -1)
-    {
-        perror("open");
-        return 1;
-    }
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s\n", line);
-        free(line);
-    }
-    close(fd);
-    return 0;
-}
+//     fd = open("test.txt", O_RDONLY);
+// 	//fd = 0;
+//     // if (fd == -1)
+//     // {
+//     //     perror("open");
+//     //     return 1;
+//     // }
+//     // while ((line = get_next_line(fd)) != NULL)
+//     // {
+//     //     printf("%s\n", line);
+//     //     free(line);
+//     // }
+// 	printf("%s\n", get_next_line(fd));
+// 	printf("%s\n", get_next_line(fd));
+// 	printf("%s\n", get_next_line(fd));
+// 	//printf("%s\n", get_next_line(fd));
+// 	printf("%s\n", get_next_line(45346));
+//     close(fd);
+//     return 0;
+// }
