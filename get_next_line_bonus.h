@@ -6,7 +6,7 @@
 /*   By: djelacik <djelacik@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/22 15:33:29 by djelacik          #+#    #+#             */
-/*   Updated: 2024/05/22 15:58:51 by djelacik         ###   ########.fr       */
+/*   Updated: 2024/05/22 16:51:39 by djelacik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-//<limits.h> included for OPEN_MAX: number of
+// <limits.h> included for OPEN_MAX: number of
 // fd a process can have open at the same time.
 
 # include <limits.h>
