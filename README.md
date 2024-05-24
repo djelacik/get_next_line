@@ -2,7 +2,7 @@
 
 Write a function that returns a line read from a file descriptor.
 
-This was my second project at Hive Helsinki. The task was quite straightforward, so the implementation was simple. Despite the simplicity, memory management was challenging, especially ensuring there are no leaks if the file descriptor returns an error midway through the program.
+The task was quite straightforward, so the implementation was simple. Despite the simplicity, memory management was challenging, especially ensuring there are no leaks if the file descriptor returns an error midway through the program.
 
 The bonus part required managing multiple file descriptors with a single static variable. The implementation was straightforward as I assumed there could be a maximum number of open file descriptors at once, so I used a static array of integers.
 
